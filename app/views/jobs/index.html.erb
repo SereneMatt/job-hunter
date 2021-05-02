@@ -31,10 +31,9 @@
       <div class="columns">
         <div class="column">
           <%= form_with url: "/search", method: :get do |form| %>
-          <%# <form class="form"> %>
             <div class="field">
               <div class="control">
-                <input class="input" type="text" placeholder="Text input">
+                <%= form.text_field :text, class: "input", type: "text", placeholder: "Text input" %>
               </div>
             </div>
             <div class="field is-grouped">
@@ -42,49 +41,53 @@
                 <button class="button is-link">Search</button>
               </div>
             </div>
-          <%# </form> %>
           <% end %>
         </div>
       </div>
 
 
       <div class="container">
-        <div class="columns">
-          <div class="column">
-            <div class="box">
-              <article class="media">
-                <div class="media-left">
-                  <figure class="image is-64x64">
-                    <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                    <strong>Software engineer (m/f)</strong> <small>Company name</small> | <small>Posted 10 days ago</small>
-                    </p>
-                  </div>
-                  <nav class="level is-mobile">
-                    <div class="level-left">
-                      <small class="level-item has-text-danger">3 down-votes</small>
-                      <small class="level-item">|</small>
-                      <small class="level-item has-text-success">2 up-votes</small>
-                      <small class="level-item">by username1, username2, username3 and 10 more users</small>
+        <% if @search_results %>
+          <% @search_results.each do |search_result| %>
+            <div class="columns">
+              <div class="column">
+                <div class="box">
+                  <article class="media">
+                    <div class="media-left">
+                      <figure class="image is-64x64">
+                        <%= image_tag "#{search_result["company_logo"]}", alt: "Company logo" %>
+                        <%# <img src="#{search_result.company_logo}" alt="Image"> %>
+                      </figure>
                     </div>
-                    <div class="level-right">
-                      <a class="level-item button is-small is-success" aria-label="upvote">
-                        Up-vote
-                      </a>
-                      <a class="level-item button is-small is-danger" aria-label="upvote">
-                        down-vote
-                      </a>
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <strong><%= search_result["title"] %></strong> <small><%= search_result["company"] %></small> | <small>Posted <%= @time %></small>
+                        </p>
+                      </div>
+                      <nav class="level is-mobile">
+                        <div class="level-left">
+                          <small class="level-item has-text-danger">3 down-votes</small>
+                          <small class="level-item">|</small>
+                          <small class="level-item has-text-success">2 up-votes</small>
+                          <small class="level-item">by username1, username2, username3 and 10 more users</small>
+                        </div>
+                        <div class="level-right">
+                          <a class="level-item button is-small is-success" aria-label="upvote">
+                            Up-vote
+                          </a>
+                          <a class="level-item button is-small is-danger" aria-label="upvote">
+                            down-vote
+                          </a>
+                        </div>
+                      </nav>
                     </div>
-                  </nav>
+                  </article>
                 </div>
-              </article>
+              </div>
             </div>
-          </div>
-        </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
 
