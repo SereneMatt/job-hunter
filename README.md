@@ -17,3 +17,10 @@ bundle install
 ```
 rails s
 ```
+
+### Running tests
+Tests are run using [rpsec-rails](https://github.com/rspec/rspec-rails). To execute tests, run:
+
+```
+bundle exec rspec
+```
