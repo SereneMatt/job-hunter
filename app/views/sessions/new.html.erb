@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+  </head>
+  <body>
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <span class="title is-4 has-text-white">JOBS</span>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <span class="title is-4 has-text-white"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title is-1">
+            Login
+          </h1>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-4 is-offset-4">
+          <%= form_with scope: :session, url: login_path, class: "form" do |form| %>
+            <div class="field">
+              <% form.label :username, class: "label" %>
+              <div class="control">
+                <%= form.text_field :username, class: "input", type: "text", placeholder: "Enter username" %>
+              </div>
+            </div>
+            <div class="field is-grouped">
+              <div class="control">
+                <%= form.submit "Log in", class: "button is-link" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
