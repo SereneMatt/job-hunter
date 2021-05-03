@@ -56,13 +56,12 @@
                     <div class="media-left">
                       <figure class="image is-64x64">
                         <%= image_tag "#{search_result["company_logo"]}", alt: "Company logo" %>
-                        <%# <img src="#{search_result.company_logo}" alt="Image"> %>
                       </figure>
                     </div>
                     <div class="media-content">
                       <div class="content">
                         <p>
-                          <strong><%= search_result["title"] %></strong> <small><%= search_result["company"] %></small> | <small>Posted <%= @time %></small>
+                          <strong><%= search_result["title"] %></strong> <small><%= search_result["company"] %></small> | <small>Posted <%= search_result["posted_at"] %> ago</small>
                         </p>
                       </div>
                       <nav class="level is-mobile">
