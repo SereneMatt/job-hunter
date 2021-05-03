@@ -14,7 +14,7 @@
 
         <div class="navbar-end">
           <div class="navbar-item">
-            <span class="title is-4 has-text-white">Logged in Username</span>
+            <span class="title is-4 has-text-white"><% if logged_in? %><%= current_user.username %><% end %></span>
           </div>
         </div>
       </div>
