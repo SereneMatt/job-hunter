@@ -72,10 +72,10 @@
                           <small class="level-item">by username1, username2, username3 and 10 more users</small>
                         </div>
                         <div class="level-right">
-                          <%= link_to 'Up-vote', toggle_vote_path, params: {job_id: search_result["id"]}, method: "post", class: "level-item button is-small is-success" %>
-                          <a class="level-item button is-small is-danger" aria-label="upvote">
-                            down-vote
-                          </a>
+                          <%= link_to 'Up-vote',
+                            toggle_vote_url(user: current_user, job_id: search_result["id"], status: true), method: :post, class: "level-item button is-small is-success", aria: {label: "upvote"} %>
+                          <%= link_to 'Down-vote',
+                            toggle_vote_url(user: current_user, job_id: search_result["id"], status: false), method: :post, class: "level-item button is-small is-danger", aria: {label: "downvote"} %>
                         </div>
                       </nav>
                     </div>

@@ -11,7 +11,20 @@ class JobsController < ApplicationController
   end
 
   def toggle_vote
-    byebug
+    job_id = params[:job_id]
+    user = params[:user]
+    status = params[:status]
+
+    vote = Vote.find_by(user_id: user, job_id: job_id)
+
+    if vote.blank?
+      Vote.create(user_id: user, job_id: job_id, status: status)
+    else
+      vote.update(status: status)
+    end
+
+    # TODO: Redirect user to jobs and retain the search results
+    # render :index
   end
 
   private
@@ -20,12 +33,16 @@ class JobsController < ApplicationController
     
       response_body.map {|search_result|
         result = Hash.new
-        result = search_result.select{|key| ["company_logo", "title", "company"].include?(key) }
+        result = search_result.select{|key| ["id", "company_logo", "title", "company"].include?(key) }
         result["posted_at"] = ApplicationController.helpers.time_ago_in_words(search_result["created_at"])
   
         search_results.push(result)
       }
 
       search_results
+    end
+
+    def vote_params
+      params.permit(:job_id, :user, :job_id, :status)
     end
 end
