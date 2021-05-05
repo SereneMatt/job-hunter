@@ -10,6 +10,10 @@ class JobsController < ApplicationController
     render :index
   end
 
+  def toggle_vote
+    byebug
+  end
+
   private
     def process_results response_body
       search_results = []
