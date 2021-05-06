@@ -35,14 +35,30 @@ class JobsController < ApplicationController
         result = Hash.new
         result = search_result.select{|key| ["id", "company_logo", "title", "company"].include?(key) }
         result["posted_at"] = ApplicationController.helpers.time_ago_in_words(search_result["created_at"])
-        votes = Vote.where(job_id: result["id"])
-        result["upvote_count"] = (votes.filter {|vote| vote.status == true}).count
-        result["downvote_count"] = (votes.filter {|vote| vote.status == false}).count
+
+        vote_statistics = get_vote_statistics result["id"]
+        result["upvote_count"] = vote_statistics["upvote_count"]
+        result["downvote_count"] = vote_statistics["downvote_count"]
+        result["voted_by"] = vote_statistics["voted_by"]
   
         search_results.push(result)
       }
 
       search_results
+    end
+
+    def get_vote_statistics job_id
+      vote_statistics = {}
+
+      votes = Vote.where(job_id: job_id)
+      vote_statistics["upvote_count"] = (votes.filter {|vote| vote.status == true}).count
+      vote_statistics["downvote_count"] = (votes.filter {|vote| vote.status == false}).count
+      users = votes.map {|vote| vote.user.username}
+
+      vote_statistics["voted_by"] = users.length > 0 ? ((users.length - 3) > 0 ? "by #{users[0...3].join(", ")} and #{users.length - 3} more users"
+        : "by #{users[0...3].join(", ")}") : ""
+
+      vote_statistics
     end
 
     def vote_params
