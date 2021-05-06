@@ -35,6 +35,9 @@ class JobsController < ApplicationController
         result = Hash.new
         result = search_result.select{|key| ["id", "company_logo", "title", "company"].include?(key) }
         result["posted_at"] = ApplicationController.helpers.time_ago_in_words(search_result["created_at"])
+        votes = Vote.where(job_id: result["id"])
+        result["upvote_count"] = (votes.filter {|vote| vote.status == true}).count
+        result["downvote_count"] = (votes.filter {|vote| vote.status == false}).count
   
         search_results.push(result)
       }
