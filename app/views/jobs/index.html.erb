@@ -66,10 +66,10 @@
                       </div>
                       <nav class="level is-mobile">
                         <div class="level-left">
-                          <small class="level-item has-text-danger">3 down-votes</small>
+                          <small class="level-item has-text-danger"><%= search_result["downvote_count"] %> down-votes</small>
                           <small class="level-item">|</small>
-                          <small class="level-item has-text-success">2 up-votes</small>
-                          <small class="level-item">by username1, username2, username3 and 10 more users</small>
+                          <small class="level-item has-text-success"><%= search_result["upvote_count"] %> up-votes</small>
+                          <small class="level-item"><%= search_result["voted_by"] %></small>
                         </div>
                         <div class="level-right">
                           <%= link_to 'Up-vote',
