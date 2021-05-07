@@ -1,6 +1,5 @@
 <html>
   <head>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
   </head>
   <body>
@@ -73,9 +72,9 @@
                         </div>
                         <div class="level-right">
                           <%= link_to 'Up-vote',
-                            toggle_vote_url(user: current_user, job_id: search_result["id"], status: true), method: :post, class: "level-item button is-small is-success", aria: {label: "upvote"} %>
+                            toggle_vote_url(user: current_user, job_id: search_result["id"], status: true, original_url: request.original_url), method: :post, class: "level-item button is-small is-success", aria: {label: "upvote"} %>
                           <%= link_to 'Down-vote',
-                            toggle_vote_url(user: current_user, job_id: search_result["id"], status: false), method: :post, class: "level-item button is-small is-danger", aria: {label: "downvote"} %>
+                            toggle_vote_url(user: current_user, job_id: search_result["id"], status: false, original_url: request.original_url), method: :post, class: "level-item button is-small is-danger", aria: {label: "downvote"} %>
                         </div>
                       </nav>
                     </div>

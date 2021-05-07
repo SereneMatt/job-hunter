@@ -23,8 +23,7 @@ class JobsController < ApplicationController
       vote.update(status: status)
     end
 
-    # TODO: Redirect user to jobs and retain the search results
-    # render :index
+    redirect_to params[:original_url]
   end
 
   private
